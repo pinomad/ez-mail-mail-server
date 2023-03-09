@@ -1,12 +1,13 @@
 const express = require('express');
+const createError = require('http-errors');
 
 const index = require('./routes/index');
 
 const app = express();
 
-app.use('/', index);
-
 app.use(express.json());
+
+app.use('/', index);
 
 app.use(function (req, res, next) {
   next(createError(404));

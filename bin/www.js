@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const http = require('http');
+const debug = require('debug')('server:server');
 
 const app = require('../app');
 const config = require('../config');
