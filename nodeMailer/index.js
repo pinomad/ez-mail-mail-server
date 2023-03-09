@@ -8,13 +8,12 @@ const {
   smtpDomain,
 } = require('../config');
 
-exports.sendMail = async function ({
+exports.sendMail = async function (
   emailTitle,
   emailContent,
   sender,
   recipientAddress,
-  userName,
-}) {
+) {
   const transporter = nodemailer.createTransport({
     host: smtpHost,
     port: smtpPort,
@@ -26,11 +25,13 @@ exports.sendMail = async function ({
   });
 
   const info = await transporter.sendMail({
-    from: `${sender || userName} <${smtpId}@${smtpDomain}>`,
+    from: `${sender} <${smtpId}@${smtpDomain}>`,
     to: recipientAddress,
     subject: emailTitle,
     html: emailContent,
   });
+
+  transporter.close();
 
   return info;
 };
